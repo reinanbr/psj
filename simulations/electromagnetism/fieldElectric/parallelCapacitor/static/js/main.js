@@ -1,3 +1,6 @@
+
+
+
 var res = 10
 var grid_X
 var grid_Y
@@ -6,12 +9,12 @@ var sizeScreenHeight
 var p1
 var p2
 var Ex
-const E = 5000
+var E = 5000
 var overBox = false
 var locked = false
 var widthScreen = 800
 var heightScreen = 500
-
+let dt = 0.0000004
 //*(1-d/widthScreen)
 Ex = (p) => {
     d = p.pos.x
@@ -24,6 +27,15 @@ function showDdp(p1,p2){
     $('#p1').text(`p1: ${p1.V}V`)
     $('#p2').text(`p2: ${p2.V}V`)
     let ddp = Math.abs(p1.V-p2.V)
+    if(ddp>=3){
+        $('#jetEletric').html(`<span><img height='50px' src='/simulations/electromagnetism/fieldElectric/parallelCapacitor/assets/imgs/art/jet_eletric.gif'></span>`)
+        playSound()
+
+    }
+    else{
+        $('#jetEletric').html('')
+        stopSound()
+    }
     $('#ddp').text(`ddp: ${ddp}V`)
 }
 
@@ -57,10 +69,10 @@ class Ball {
     }
 
     mouseDragged() {
-
+        
         if (this.locked) {
-            this.pos.x = mouseX - this.xOffSet
-            this.pos.y = mouseY - this.yOffSet
+            this.pos.x = mouseX - this.xOffSet*dt
+            this.pos.y = mouseY - this.yOffSet*dt
         }
     }
 
@@ -77,8 +89,8 @@ class Ball {
         else {
             this.locked = false
         }
-        this.xOffSet = mouseX - this.pos.x
-        this.yOffSet = mouseY - this.pos.y
+        this.xOffSet = (mouseX - this.pos.x)*dt
+        this.yOffSet = (mouseY - this.pos.y)*dt
     }
 
     moving() {

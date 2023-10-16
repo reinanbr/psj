@@ -1,60 +1,120 @@
 
-
 $('#footer').append(`
-<footer class="shadow-lg text-center text-white" style="background-color:#0a0016;">
-  <!-- Grid container -->
-  <div class="container p-4 pb-0">
-    <!-- Section: Social media -->
-    <section class="mb-4">
 
-      <!-- Twitter -->
-      <a class="btn btn-outline-light btn-floating m-1" title="Twitter - BezerraReinan"
-        href="https://twitter.com/BezerraReinan" role="button"><i class="bi bi-twitter"></i></a>
+<br><br><br>
 
-      <!-- Instagram -->
-      <a class="btn btn-outline-light btn-floating m-1" title="Instagram - reinanbr_"
-        href="https://www.instagram.com/reinanbr_/" role="button"><i class="bi bi-instagram"></i></a>
+<br><br><br>
 
-      <!-- Github -->
-      <a class="btn btn-outline-light btn-floating m-1" title="GitHub - ReinanBr" href="https://github.com/reinanbr"
-        role="button"><i class="bi bi-github"></i></a>
+
+
+<footer class="text-center text-white" style="background-color:#080a11;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+    <section class="sectFooter" style="color:gray">
+        <div class="container text-center text-md-start mt-3">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>©2023
+                    </h6>
+                    <p>
+                    <div class="container p-4 pb-0">
+                        <!-- Section: Social media -->
+                        <section class="mb-4">
+
+                            <!-- Twitter -->
+                            <a class="btn btn-outline-light btn-floating m-1" title="Twitter - BezerraReinan"
+                                href="https://twitter.com/BezerraReinan" role="button"><i
+                                    class="bi bi-twitter"></i></a>
+
+                            <!-- Instagram -->
+                            <a class="btn btn-outline-light btn-floating m-1" title="Instagram - reinanbr_"
+                                href="https://www.instagram.com/reinanbr_/" role="button"><i
+                                    class="bi bi-instagram"></i></a>
+
+                            <!-- Github -->
+                            <a class="btn btn-outline-light btn-floating m-1" title="GitHub - ReinanBr"
+                                href="https://github.com/reinanbr" role="button"><i class="bi bi-github"></i></a>
+                        </section>
+                        <br /><br /><br />
+                        <!-- Section: Social media -->
+                    </div>
+                    <hr style="background-color:gray"/>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Temas
+                    </h6>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Mecânica e Dinâmica</a>
+                    </p>
+
+                    <p>
+                        <a href="#!" class="text-reset">Fluídos</a>
+
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Termodinâmica</a>
+
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Ondas</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Eletromagnetísmo</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Física Moderna</a>
+
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contato</h6>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        perseu912@gmail.com
+                    </p>
+
+                    <p><i class="fas fa-print me-3"></i> + 55 74 9 9932-9688</p>
+                    <p><i class="fas fa-home me-3"></i> Petrolina - PE </p>
+                    <p>
+                        <a href="/privacity" class="text-reset">Politíca de Privacidade</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
     </section>
-
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-  <div class="shadow-lg card d-flex p-1 text-center p-3" style="background-color: #05000b;">
-    © 2023
-    <a class="text-white" href="https://github.com/reinanbr">ReySofts | Reinan Br</a>
-
-    <small><a class="text-white" href="/sites/cardapio/privacidade.html">Política de Privacidade e Direito
-        Autoral</a></small>
-    <!-- <br><small><a class="text-white" href="/privacidade.html">Codigo-Fonte</a></small>
-     -->
-
-<div style="text-align:left;width:20wh">
-<img width="90wh" src='/sites/cardapio/assets/imgs/marcaif.png'>
-<img width="90wh" src='/sites/cardapio/assets/imgs/reysofts_logo.png'>
-</div>
-    <hr style="background-color:white" />
-
-    <div id="painelAlert">
-
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #030706; color:#566463">
+        <small> © 2023
+            <a class="text-white" style='color:#566463' href="https://github.com/reinanbr">ReySofts</a></small>
     </div>
-    <div style='text-align:left'>
-      <textarea id='inputComment'
-        style="border-color:white;border-radius:10px; font-size:15px;padding:19px 25px;height:12vh;width:25wh"
-        placeholder="relate um bug, ou envie uma sugestão ou comentário."></textarea>
-      <br />
-      <button type='button' id="btnSendFeed" class='btn btn-dark'>enviar</button>
-    </div>
-
-  </div>
-  <!-- <div class='nameVersion'><small>Em desenvolvimento..</small></div> -->
-  <!-- <div class='text-center p-3' style='background-color:#001339'><small>Este site não possui nenhuma ligação com
-      nenhuma instituição federal.</small></div>
-  Copyright -->
-</footer>`)
-
+    <!-- Copyright -->
+</footer>
+`)
