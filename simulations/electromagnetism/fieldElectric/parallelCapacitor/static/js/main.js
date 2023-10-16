@@ -28,7 +28,7 @@ function showDdp(p1,p2){
     $('#p2').text(`p2: ${p2.V}V`)
     let ddp = Math.abs(p1.V-p2.V)
     if(ddp>=3){
-        $('#jetEletric').html(`<span><img height='50px' src='/simulations/electromagnetism/fieldElectric/parallelCapacitor/assets/imgs/art/jet_eletric.gif'></span>`)
+        $('#jetEletric').html(`<span><img height='50px' src='/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/assets/imgs/art/jet_eletric.gif'></span>`)
         playSound()
 
     }

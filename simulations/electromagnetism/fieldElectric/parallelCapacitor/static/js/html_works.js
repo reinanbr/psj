@@ -1,11 +1,21 @@
 
 $('#footer').append(`
+<hr>
+<p style='color:gray'>
+Em um capacitor com placas paralelas, o campo elétrico entre as placas é uniforme e direcionado perpendicularmente às placas.<br>As linhas equipotenciais são linhas imaginárias que conectam pontos com o mesmo potencial elétrico. <br>No caso de um capacitor de placas paralelas, as linhas equipotenciais são perpendiculares às linhas de campo elétrico e paralelas às placas.</p>
+
+
+<p style='color:gray'>As linhas equipotenciais são perpendiculares ao campo elétrico. <br>Se você visualizar as linhas de campo elétrico, elas se estenderiam de uma placa à outra, de forma uniforme, com as linhas equipotenciais cortando-as perpendicularmente.</p>
+
+<p style='color:gray'>Em um capacitor ideal (placas infinitamente grandes e paralelas), as linhas equipotenciais são linhas retas uniformemente espaçadas, e o campo elétrico entre as placas é constante. <br>Essa configuração facilita os cálculos e a compreensão do comportamento elétrico do capacitor.</p>
 
 <br><br><br>
 
 <br><br><br>
 
-
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 <footer class="text-center text-white" style="background-color:#080a11;">
     <!-- Grid container -->
