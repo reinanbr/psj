@@ -10,8 +10,8 @@
   <meta name="theme-color" content="#0b0b0b">
   <meta property="og:site_name" content="SPj - Simulador do Campo Elétrico Entre Duas Placas Paralelas de um Capacitor">
   <meta property="og:title" content="SPj - Simulador do Campo Elétrico Entre Duas Placas Paralelas de um Capacitor">
-  <meta name="description" content="Diferentes Simulações das Mais Diversas Àreas Física">
-  <meta name="og:description" content="Diferentes Simulações das Mais Diversas Àreas Física">
+  <meta name="description" content="DExplore a fascinante interação entre cargas elétricas e campos elétricos com nosso simulador interativo de linhas equipotenciais. Navegue visualmente pelo espaço entre as placas de um capacitor, ajuste a diferença de potencial e observe a criação de linhas equipotenciais perpendiculares às linhas de campo elétrico. Utilize medidores em diferentes pontos para acompanhar em tempo real as variações de potencial elétrico">
+  <meta name="og:description" content="DExplore a fascinante interação entre cargas elétricas e campos elétricos com nosso simulador interativo de linhas equipotenciais. Navegue visualmente pelo espaço entre as placas de um capacitor, ajuste a diferença de potencial e observe a criação de linhas equipotenciais perpendiculares às linhas de campo elétrico. Utilize medidores em diferentes pontos para acompanhar em tempo real as variações de potencial elétrico">
   
 
   <link rel="apple-touch-icon" sizes="192x192" href="/psj/assets/icons/favicon/android-chrome-192x192.png">
@@ -68,23 +68,23 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Dinâmica </a>
+          <a class="nav-link text-white" href="/psj/errors/making.html">Dinâmica </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Fluídos</a>
+          <a class="nav-link text-white" href="/psj/errors/making.html">Fluídos</a>
         </li>
           <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Termodinâmica </a>
+          <a class="nav-link text-white" href="/psj/errors/making.html">Termodinâmica </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Ondas</a>
+          <a class="nav-link text-white" href="/psj/errors/making.html">Ondas</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Optíca </a>
+          <a class="nav-link text-white" href="/psj/errors/making.html">Optíca </a>
         </li>  <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Eletromagnetismo </a>
+          <a class="nav-link text-white" href="/psj/simulations/electromagnetism">Eletromagnetismo </a>
         </li>  <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Física Moderna </a>
+          <a class="nav-link text-white" href="/psj/errors/making.html">Física Moderna </a>
         </li>
       </ul>
       <span class="navbar-text">
@@ -105,6 +105,15 @@
         <br />
         <button type='button' id="btnSendFeed" class='btn btn-dark'>enviar</button>
       </div>
+
+      <br><br><br>
+      <label for="rangeE">Selecione um Valor Para o Potencial Aplicado:</label>
+<input type="range" id="rangeE" min="0" max="100" value="50">
+
+<p>Potencial Total Aplicado: <span id="displayValue">50V</span></p>
+
+      <hr style="background-color:gray;text-align:left"/>
+ 
   
   <audio id="myAudio">
     <source src="/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/assets/audio/jetEletric.mp3" type="audio/mp3">

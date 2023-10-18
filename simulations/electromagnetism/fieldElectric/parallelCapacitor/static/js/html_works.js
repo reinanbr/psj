@@ -1,6 +1,7 @@
 
 $('#footer').append(`
 <hr>
+<h4 style='color:gray'> Campo Elétrico e Superfícies Equipotenciais</h4>
 <p style='color:gray'>
 Em um capacitor com placas paralelas, o campo elétrico entre as placas é uniforme e direcionado perpendicularmente às placas.<br>As linhas equipotenciais são linhas imaginárias que conectam pontos com o mesmo potencial elétrico. <br>No caso de um capacitor de placas paralelas, as linhas equipotenciais são perpendiculares às linhas de campo elétrico e paralelas às placas.</p>
 
@@ -9,7 +10,10 @@ Em um capacitor com placas paralelas, o campo elétrico entre as placas é unifo
 
 <p style='color:gray'>Em um capacitor ideal (placas infinitamente grandes e paralelas), as linhas equipotenciais são linhas retas uniformemente espaçadas, e o campo elétrico entre as placas é constante. <br>Essa configuração facilita os cálculos e a compreensão do comportamento elétrico do capacitor.</p>
 
-<br><br><br>
+<img src='https://static.preparaenem.com/conteudo_legenda/3e1cda22b92d4bc6643a21709c64abf8.jpg'>
+<br><p><a href='https://www.preparaenem.com/fisica/superficies-equipotenciais.htm' class='text-white'><i><small>Fonte: PreparaEnem</small></i> </a></p><br><br>
+
+<p style='color:gray'>A equação do campo elétrico relacionado ao potencial é dado por:<br><br> E(d) = V/d <br><br>E<i> é vetor do campo elétrico </i><br>V<i> é potencial presente</i><br>d<i> é a distância do ponto medido a fonte de carga</i><br> </p>
 
 <br><br><br>
 
@@ -132,7 +136,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-
 
 
 function alertBt(title, text, idDivPainel, mode) {
-  $(`#${idDivPainel}`).append(` <div class="alert alert-${mode} alert-dismissible fade show" role="alert">
+    $(`#${idDivPainel}`).append(` <div class="alert alert-${mode} alert-dismissible fade show" role="alert">
   <strong>${title}</strong> ${text}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -142,7 +146,7 @@ function alertBt(title, text, idDivPainel, mode) {
 
 
 
-function sendFeedBack(){
+function sendFeedBack() {
     let feed = $('#inputComment').val()
     console.log(feed)
     let userAgent = navigator.userAgent;
@@ -151,9 +155,9 @@ function sendFeedBack(){
         .then((res) => {
             console.log(res)
             if (!res.ok) {
-                
+
                 throw new Error('ERROR IN REQUEST: ' + res.status);
-              }
+            }
             return res.json()
         }).then((statusComment) => {
             if (statusComment.result) {
@@ -175,11 +179,23 @@ function sendFeedBack(){
         })
         .catch((e) => {
             alertBt('Oops!',
-            `Tivemos algum problema com o nosso servidor. Tente novamente mais tarde. ERROR: ${e}`,
-            'painelAlert',
-            'danger')
+                `Tivemos algum problema com o nosso servidor. Tente novamente mais tarde. ERROR: ${e}`,
+                'painelAlert',
+                'danger')
             console.log(e)
         })
 }
 
+
+
 $('#btnSendFeed').click(sendFeedBack)
+
+
+
+$('#rangeE').on('input', function () {
+    // Atualiza o valor exibido
+    let valueE = $(this).val()
+    $('#displayValue').text(`${valueE}V`);
+});
+
+

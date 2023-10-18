@@ -1,6 +1,5 @@
 
 
-
 var res = 10
 var grid_X
 var grid_Y
@@ -9,7 +8,7 @@ var sizeScreenHeight
 var p1
 var p2
 var Ex
-var E = 5000
+
 var overBox = false
 var locked = false
 var widthScreen = 800
@@ -18,10 +17,10 @@ let dt = 0.0000004
 //*(1-d/widthScreen)
 Ex = (p) => {
     d = p.pos.x
+    let E = $('#rangeE').val()*100
     p.V = Math.round((E / d))
     return p
 }
-
 
 function showDdp(p1,p2){
     $('#p1').text(`p1: ${p1.V}V`)
