@@ -40,11 +40,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&family=Young+Serif&display=swap"
     rel="stylesheet">
-    <script src="https://raw.githubusercontent.com/reinanbr/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/static/js/html_works.js"></script>
+    
 
-    <script src="https://raw.githubusercontent.com/reinanbr/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/static/js/main.js"></script>
-
-  <title>Simulador do Campo Elétrico Entre Duas Placas Paralelas de um Capacitor</title>
+  <title>Simulador do Movimento Uniforme</title>
   <style>
     body
     {
@@ -102,9 +100,12 @@
   <input type="range" id="speed" min="1" max="20" value="1">
   <p>Veloxidade em km/h: <span id='speedKm'>0</span>km/h</p>
   <p>Distância percorrida: <span id="distanceValue">0m</span> metros</p>
+  <hr style='margin:0;background-color:gray'>
+  	<p style='margin:0;color:gray' id='loadImg'>carregando...</p>
   <div id="sketch-holder"></div>
 </div>
-  <script>
+  <hr style='margin:0;background-color:gray'>
+<script>
     let speed = 1;
     let offset = 0; // Deslocamento da pista
     let distance = 0; // Distância percorrida em metros (cada linha é 50px)
@@ -112,7 +113,10 @@
 
     function preload() {
       // Carrega a imagem do carro
-      carImage = loadImage('car.png');
+      document.getElementById('loadImg').innerText = 'carregando simulador..'
+      carImage = loadImage('https://raw.githubusercontent.com/reinanbr/psj/refs/heads/main/simulations/dinamic/cinematic/mu/car.png');
+      
+      
     }
 
     function setup() {
@@ -128,6 +132,7 @@
 
       // Desenha a imagem do carro rotacionada e redimensionada
       push();
+      document.getElementById('loadImg').innerText = ''
       translate(width / 2, height / 2); // Move o ponto de origem para o centro do canvas
       rotate(radians(-49)); // Rotaciona a imagem 45 graus no sentido anti-horário
       imageMode(CENTER); // Desenha a imagem a partir do centro
@@ -299,11 +304,6 @@ Movimento uniforme é aquele em que um objeto se desloca com velocidade constant
 
 
 
-    <script src="/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/static/js/sonoplastia.js"></script>
-
-    <script src="/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/static/js/html_works.js"></script>
-
-    <script src="/psj/simulations/electromagnetism/fieldElectric/parallelCapacitor/static/js/main.js"></script>
-
+    
   </body>
 </html>
