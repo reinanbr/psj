@@ -42,7 +42,7 @@
     rel="stylesheet">
     
 
-  <title>Simulador de Movimento Uniformemente Variado</title>
+  <title>Simulador de Um Foguete no Espaço</title>
   <style>
     body
     {
@@ -94,7 +94,7 @@
   <br>
   <br>
   
-<h2 style='color:gray' color='gray'>Simulador de Movimento Uniformemente Variado</h2>
+<h2 style='color:gray' color='gray'>Simulador de um Foguete no Espaço</h2>
 <div style='color:gray' color='gray'>
   <label for="acceleration">Aceleração: <span id="accelerationValue">0.1</span> m/s²</label>
   <input type="range" id="acceleration" min="0.01" max="0.5" value="0.1" step="0.01">
@@ -108,98 +108,158 @@
 
  
 
-  <script>
-    let speed = 0; // Velocidade inicial
-    let acceleration = 0.1; // Aceleração
-    let offset = 0; // Deslocamento da pista
-    let distance = 0; // Distância percorrida em metros (cada linha é 50px)
-    let carImage; // Variável para armazenar a imagem do carro
+    </div>
+    <div class="controls">
+        <button id="rotateCW">Girar Horário</button>
+        <button id="rotateCCW">Girar Anti-horário</button>
+        <button id="propulsor">Propulsor</button>
+    </div>
+    <div style="color:white" id="info"></div>
+    <script>
+let gridSize = 40;
+let offsetX = 0;
+let offsetY = 0;
+let rocket;
+let rotation = 0;
+let speedX = 0;
+let speedY = 0;
+let rotationSpeed = 0;
+let acceleration = 0.7;  // Aceleração aplicada pelo propulsor
+let rotationAcceleration = 0.01;  // Aceleração de rotação
+let rotationDecay = 0.91;  // Decaimento da rotação
+let distanceTraveled = 0;  // Distância percorrida
+let initialX, initialY;
+let smoke = [];  // Array para armazenar as partículas de fumaça
+let sizeImg = 150
 
-    function preload() {
-      // Carrega a imagem do carro
-      document.getElementById('loadImg').innerText = 'carregando simulador..'
-      carImage = loadImage('https://raw.githubusercontent.com/reinanbr/psj/refs/heads/main/simulations/dinamic/cinematic/mu/car.png');
-      
-    }
 
-    function setup() {
-    document.getElementById('loadImg').innerText = ''
-      let canvas = createCanvas(600, 200);
-      canvas.parent('sketch-holder');
+// Carregar a imagem da nave
+function preload() {
+    rocket = loadImage('falcon9.png');  // Certifique-se de que o arquivo 'falcon9.png' está na mesma pasta
+}
 
-      // Adiciona evento de clique ao botão de reset
-      document.getElementById('resetButton').addEventListener('click', resetSimulation);
-    }
+function setup() {
+    let canvas = createCanvas(800, 600);
+    canvas.parent('sketch-holder');
+    initialX = width / 2;
+    initialY = height / 2;
 
-    function draw() {
-      background(220);
-
-      // Desenha a pista com numeração
-      drawTrack();
-
-      // Desenha a imagem do carro rotacionada e redimensionada
-      push();
-      translate(width / 2, height / 2); // Move o ponto de origem para o centro do canvas
-      rotate(radians(-49)); // Rotaciona a imagem 45 graus no sentido anti-horário
-      imageMode(CENTER); // Desenha a imagem a partir do centro
-      image(carImage, 0, 0, 200, 200); // Imagem do carro com 40x40 pixels
-      pop();
-
-      // Atualiza a velocidade e o deslocamento da pista
-      speed += acceleration; // Aceleração aumenta a velocidade
-      offset -= speed; // Deslocamento da pista com a nova velocidade
-
-      // Atualiza a distância e reseta o offset ao passar da linha
-      if (offset <= -50) {
-        offset = 0;
-        distance++; // Cada linha representa 1 metro
-        document.getElementById('distanceValue').innerText = distance;
-      }
-
-      // Atualiza o valor da velocidade na interface
-      document.getElementById('speedValue').innerText = speed.toFixed(2);
-    }
-
-    // Função para desenhar a pista com numeração
-    function drawTrack() {
-      stroke(0);
-      strokeWeight(2);
-      fill(0);
-      textSize(12);
-      for (let i = 0; i < width; i += 50) {
-        // Desenha linhas verticais para representar a pista
-        line(i + offset, height / 2 - 40, i + offset, height / 2 + 40);
-        // Numera cada linha como metros
-        text(distance + int(i / 50)+'m', i + offset, height / 2 + 60);
-      }
-    }
-
-    // Atualiza a aceleração com o valor do input
-    document.getElementById('acceleration').addEventListener('input', function() {
-      acceleration = parseFloat(this.value);
-      document.getElementById('accelerationValue').innerText = acceleration;
+    // Adicionando os eventos dos botões para cliques simples
+    document.getElementById('rotateCW').addEventListener('click', () => {
+        rotationSpeed += rotationAcceleration;  // Aumentar a rotação no sentido horário
+        // Criar fumaça na ponta do foguete no lado oposto ao giro
+        let angle = rotation - PI / 2;
+        for (let i = 0; i < 5; i++) {
+            smoke.push(new SmokeParticle(width / 2 + cos(angle) * (sizeImg/2), height / 2 + sin(angle) * (sizeImg/2), rotationSpeed * 0.5, rotationSpeed * 0.5));
+        }
     });
+    document.getElementById('rotateCCW').addEventListener('click', () => {
+        rotationSpeed -= rotationAcceleration;  // Aumentar a rotação no sentido anti-horário
+        // Criar fumaça na ponta do foguete no lado oposto ao giro
+        let angle = rotation - PI / 2;
+        for (let i = 0; i < 5; i++) {
+            smoke.push(new SmokeParticle(width / 2 + cos(angle) *  (sizeImg/2), height / 2 + sin(angle) *  (sizeImg/2), -rotationSpeed * 0.5, -rotationSpeed * 0.5));
+        }
+    });
+    document.getElementById('propulsor').addEventListener('click', () => {
+        let thrustX = acceleration * cos(rotation - PI / 2);
+        let thrustY = acceleration * sin(rotation - PI / 2);
+        speedX += thrustX;
+        speedY += thrustY;
+        // Criar novas partículas de fumaça
+        let angle = rotation - PI / 2;
+        for (let i = 0; i < 5; i++) {
+            smoke.push(new SmokeParticle((width)/2-cos(angle)* (sizeImg/2), (height)/2 - sin(angle)* (sizeImg/2), -thrustX, -thrustY));
+        }
+    });
+}
 
-    // Função para resetar a simulação
-    function resetSimulation() {
-      offset = 0;
-      distance = 0;
-      speed = 0;
-      acceleration = parseFloat(document.getElementById('acceleration').value); // Reinicia com o valor atual da aceleração
-      document.getElementById('distanceValue').innerText = distance;
-      document.getElementById('speedValue').innerText = speed.toFixed(2);
+function draw() {
+    background(0);
+
+    // Desenhar o fundo com pontos brancos sempre visíveis
+    stroke(255);
+    strokeWeight(1);
+    noFill();
+    for (let i = offsetX % gridSize - gridSize; i < width; i += gridSize) {
+        for (let j = offsetY % gridSize - gridSize; j < height; j += gridSize) {
+            point(i, j);
+        }
     }
-  </script>
-  <hr>
-<h4 style='color:gray'></h4>
-<p style='color:gray'>
-O movimento uniformemente variado (MUV) é um tipo de movimento onde a velocidade de um objeto muda de forma constante ao longo do tempo, devido à presença de uma aceleração. Ao contrário do movimento uniforme, onde a velocidade é constante, no MUV a velocidade do objeto aumenta ou diminui progressivamente.
-<br>
-<br>
-	Isso significa que, a cada instante, o objeto fica mais rápido (se a aceleração for positiva) ou mais lento (se a aceleração for negativa). Um exemplo comum desse movimento é um carro acelerando em uma estrada: no começo, ele está devagar, mas conforme o motorista pisa no acelerador, o carro vai ganhando velocidade de forma contínua.
-</p>
 
+    // Aplicar rotação com decaimento
+    rotation += rotationSpeed;
+    rotationSpeed *= rotationDecay;
 
+    // Atualizar a posição da nave
+    let newX = offsetX - speedX;
+    let newY = offsetY - speedY;
+    distanceTraveled += dist(offsetX, offsetY, newX, newY);
+    offsetX = newX;
+    offsetY = newY;
+
+    // Desenhar a nave no centro
+    push();
+    translate(width / 2, height / 2);
+    rotate(rotation);
+    imageMode(CENTER);
+    image(rocket, 0, 0, sizeImg, sizeImg);  // Exibe a imagem 'falcon9.png' com 70x70 pixels
+    pop();
+
+    // Atualizar e desenhar partículas de fumaça
+    for (let i = smoke.length - 1; i >= 0; i--) {
+        smoke[i].update();
+        smoke[i].display();
+        if (smoke[i].isDone()) {
+            smoke.splice(i, 1);
+        }
+    }
+
+    // Mostrar informações na div
+    let distX = nf(width / 2 - (offsetX + width / 2), 0, 2);
+    let distY = nf(height / 2 - (offsetY + height / 2), 0, 2);
+    document.getElementById('info').innerHTML = `
+        Velocidade: ${nf(sqrt(speedX * speedX + speedY * speedY), 0, 2)}<br>
+        Velocidade X: ${nf(speedX, 0, 2)}<br>
+        Velocidade Y: ${nf(speedY,0,2)}<br>
+        Velocidade de Giro: ${nf(abs(rotationSpeed), 0, 2)}<br>
+        Distância do Centro X: ${distX}<br>
+        Distância do Centro Y: ${distY}<br>
+        Distância Percorrida: ${nf(distanceTraveled, 0, 2)}
+    `;
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+
+class SmokeParticle {
+    constructor(x, y, speedX, speedY) {
+        this.x = x;
+        this.y = y;
+        this.speedX = speedX * 0.5;
+        this.speedY = speedY * 0.5;
+        this.alpha = 255;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= 5;
+    }
+
+    display() {
+        stroke(255, this.alpha);
+        strokeWeight(3);
+        point(this.x, this.y);
+    }
+
+    isDone() {
+        return this.alpha <= 0;
+    }
+}
+
+   </script>
 
 
 
